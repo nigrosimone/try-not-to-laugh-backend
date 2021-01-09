@@ -5,7 +5,8 @@
   "scripts": {
     "start": "node --inspect=9229 -r ts-node/register ./src/server.ts",
     "start:watch": "nodemon",
-    "build": "tsc"
+    "build": "tsc",
+    "start-prod": "node build/index.js"
   },
   "repository": {
     "type": "git",
