@@ -6,7 +6,7 @@
     "start": "node --inspect=9229 -r ts-node/register ./src/server.ts",
     "start:watch": "nodemon",
     "build": "tsc",
-    "start-prod": "node dist/index.js"
+    "start-prod": "node dist/server.js"
   },
   "repository": {
     "type": "git",
