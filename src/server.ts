@@ -13,7 +13,7 @@ const app = express();
 
 app.enable('trust proxy');
 
-app.use(cors({ origin: true, credentials: true }));
+app.use(cors({ origin: process.env.BACKEND_HOST.indexOf('.herokuapp.com') !== -1 ? process.env.BACKEND_HOST : true, credentials: true }));
 app.use(cookieParser());
 app.use(urlencoded({ extended: false }))
 app.use(json());
@@ -24,7 +24,7 @@ app.use(session({
      saveUninitialized: true,
      secret: 'ds4f5s4f5s4f5s4f5a8',
      store: new FileStore(session)(),
-     cookie: process.env.BACKEND_HOST.indexOf('.herokuapp.com') !== -1 ? { domain: '.herokuapp.com', secure: true } : { secure: false }
+     cookie: process.env.BACKEND_HOST.indexOf('.herokuapp.com') !== -1 ? { domain: 'try-not-to-laugh.herokuapp.com', secure: true } : { secure: false }
 }));
 app.use(passport.initialize());
 app.use(passport.session());
