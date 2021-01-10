@@ -1,6 +1,7 @@
 import * as dotenv from "dotenv";
 dotenv.config();
 import * as express from "express";
+import { json } from "body-parser";
 import * as session from "express-session";
 import * as passport from "passport";
 import { router } from "./routing";
@@ -13,6 +14,7 @@ app.use(session({
      secret: 'SECRET'
 }));
 
+app.use(json());
 app.use(passport.initialize());
 app.use(passport.session());
 app.use('/', router);

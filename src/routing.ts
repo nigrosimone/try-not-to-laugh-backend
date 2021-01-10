@@ -6,6 +6,7 @@ export const router = express.Router();
 
 router.get('/', (req, res) => res.send("Hello World"));
 
+router.get('/auth/facebook/profile', PassportController.authFacebookProfile);
 router.get('/auth/facebook/ok', PassportController.authFacebookOk);
 router.get('/auth/facebook/error', PassportController.authFacebookError);
 router.get('/auth/facebook', PassportController.authFacebook());

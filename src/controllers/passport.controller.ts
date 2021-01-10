@@ -46,13 +46,27 @@ export class PassportController {
 
     static authFacebookOk(req: Request, res: Response, next: Next) {
         if (req.isAuthenticated()) {
-            res.redirect(process.env.FRONTEND_HOST + 'demo/auth/ok');
+            req.session.save((err) => {
+                if( err ){
+                    PassportController.authFacebookError(req, res, next);
+                    return;
+                }
+                res.redirect(process.env.FRONTEND_HOST + '/demo/facebook-login/ok');
+            });
         } else {
             PassportController.authFacebookError(req, res, next);
         }
     }
 
     static authFacebookError(req: Request, res: Response, next: Next) {
-        res.redirect(process.env.FRONTEND_HOST + 'demo/auth/error');
+        res.redirect(process.env.FRONTEND_HOST + '/demo/facebook-login/error');
+    }
+
+    static authFacebookProfile(req: Request, res: Response, next: Next) {
+        if (req.isAuthenticated()) {
+            res.send({user: req.user});
+        } else {
+            res.sendStatus(401);
+        }
     }
 }
