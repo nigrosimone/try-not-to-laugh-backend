@@ -20,7 +20,7 @@ app.use(session({
      name: 'sessid',
      resave: true,
      saveUninitialized: true,
-     secureProxy: true,
+     proxy : process.env.BACKEND_HOST.indexOf('try-not-to-laugh.herokuapp.com') !== -1,
      secret: 'ds4f5s4f5s4f5s4f5a8',
      store: new FileStore(session)()
 }));
