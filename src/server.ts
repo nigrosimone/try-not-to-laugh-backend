@@ -13,7 +13,7 @@ const app = express();
 
 app.enable('trust proxy');
 
-app.use(cors({ origin: process.env.BACKEND_HOST.indexOf('.herokuapp.com') !== -1 ? process.env.BACKEND_HOST : true, credentials: true }));
+app.use(cors({ origin: process.env.BACKEND_HOST.indexOf('.herokuapp.com') !== -1 ? process.env.FRONTEND_HOST : true, credentials: true }));
 app.use(cookieParser());
 app.use(urlencoded({ extended: false }))
 app.use(json());
