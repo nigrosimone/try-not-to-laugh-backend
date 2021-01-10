@@ -11,18 +11,17 @@ import { router } from "./routing";
 
 const app = express();
 
+app.enable('trust proxy');
+
 app.use(cors({ origin: true, credentials: true }));
 app.use(cookieParser());
 app.use(urlencoded({ extended: false }))
 app.use(json());
 
-app.enable('trust proxy');
-
 app.use(session({
      name: 'sessid',
      resave: true,
      saveUninitialized: true,
-     proxy : process.env.BACKEND_HOST.indexOf('.herokuapp.com') !== -1,
      secret: 'ds4f5s4f5s4f5s4f5a8',
      store: new FileStore(session)()
 }));
