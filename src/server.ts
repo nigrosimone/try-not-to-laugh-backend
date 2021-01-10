@@ -28,6 +28,6 @@ app.use(passport.session());
 
 app.use('/', router);
 
-app.listen(3000, () => {
+app.listen(process.env.PORT, () => {
      console.log(`Server is running in ${process.env.BACKEND_HOST}`)
 })
