@@ -1,3 +1,4 @@
+import {Request, Response, Next} from "express";
 import * as passport from "passport";
 import * as strategy from "passport-facebook";
 
@@ -40,6 +41,18 @@ export class PassportController {
     }
 
     static authFacebookCallback(){
-        return passport.authenticate('facebook', { successRedirect: '/auth/profile', failureRedirect: '/auth/error'});
+        return passport.authenticate('facebook', { successRedirect: '/auth/facebook/ok', failureRedirect: '/auth/facebook/error'});
+    }
+
+    static authFacebookOk(req: Request, res: Response, next: Next) {
+        if (req.isAuthenticated()) {
+            res.redirect(process.env.FRONTEND_HOST + 'demo/auth/ok');
+        } else {
+            PassportController.authFacebookError(req, res, next);
+        }
+    }
+
+    static authFacebookError(req: Request, res: Response, next: Next) {
+        res.redirect(process.env.FRONTEND_HOST + 'demo/auth/error');
     }
 }

@@ -17,8 +17,6 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use('/', router);
 
-const PORT = process.env.PORT || 3000;
-
-app.listen(PORT, () => {
-     console.log(`Server is running in http://localhost:${PORT}`)
+app.listen(3000, () => {
+     console.log(`Server is running in ${process.env.BACKEND_HOST}`)
 })
