@@ -16,11 +16,13 @@ app.use(cookieParser());
 app.use(urlencoded({ extended: false }))
 app.use(json());
 
+app.enable('trust proxy');
+
 app.use(session({
      name: 'sessid',
      resave: true,
      saveUninitialized: true,
-     proxy : process.env.BACKEND_HOST.indexOf('try-not-to-laugh.herokuapp.com') !== -1,
+     proxy : process.env.BACKEND_HOST.indexOf('.herokuapp.com') !== -1,
      secret: 'ds4f5s4f5s4f5s4f5a8',
      store: new FileStore(session)()
 }));
