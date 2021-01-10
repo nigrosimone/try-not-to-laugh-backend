@@ -1,4 +1,4 @@
-import {Request, Response, Next} from "express";
+import { Request, Response, Next } from "express";
 import * as passport from "passport";
 import * as strategy from "passport-facebook";
 
@@ -36,23 +36,17 @@ passport.use(
 
 export class PassportController {
 
-    static authFacebook(){
-        return passport.authenticate('facebook', { scope: ['public_profile', 'email']});
+    static authFacebook() {
+        return passport.authenticate('facebook', { scope: ['public_profile', 'email'] });
     }
 
-    static authFacebookCallback(){
-        return passport.authenticate('facebook', { successRedirect: '/auth/facebook/ok', failureRedirect: '/auth/facebook/error'});
+    static authFacebookCallback() {
+        return passport.authenticate('facebook', { successRedirect: '/auth/facebook/ok', failureRedirect: '/auth/facebook/error' });
     }
 
     static authFacebookOk(req: Request, res: Response, next: Next) {
         if (req.isAuthenticated()) {
-            req.session.save((err) => {
-                if( err ){
-                    PassportController.authFacebookError(req, res, next);
-                    return;
-                }
-                res.redirect(process.env.FRONTEND_HOST + '/demo/facebook-login/ok');
-            });
+            res.redirect(process.env.FRONTEND_HOST + 'demo/facebook-login/ok');
         } else {
             PassportController.authFacebookError(req, res, next);
         }
@@ -64,7 +58,7 @@ export class PassportController {
 
     static authFacebookProfile(req: Request, res: Response, next: Next) {
         if (req.isAuthenticated()) {
-            res.send({user: req.user});
+            res.send({ user: req.user });
         } else {
             res.sendStatus(401);
         }
