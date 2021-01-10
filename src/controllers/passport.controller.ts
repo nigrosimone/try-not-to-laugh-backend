@@ -34,6 +34,8 @@ passport.use(
     )
 );
 
+const FRONT_END_LOGIN = process.env.FRONTEND_HOST + 'login';
+
 export class PassportController {
 
     static authFacebook() {
@@ -46,19 +48,19 @@ export class PassportController {
 
     static authFacebookOk(req: Request, res: Response, next: Next) {
         if (req.isAuthenticated()) {
-            res.redirect(process.env.FRONTEND_HOST + 'demo/facebook-login/ok');
+            res.redirect(FRONT_END_LOGIN);
         } else {
             PassportController.authFacebookError(req, res, next);
         }
     }
 
     static authFacebookError(req: Request, res: Response, next: Next) {
-        res.redirect(process.env.FRONTEND_HOST + '/demo/facebook-login/error');
+        res.redirect(FRONT_END_LOGIN);
     }
 
     static authFacebookProfile(req: Request, res: Response, next: Next) {
         if (req.isAuthenticated()) {
-            res.send({ user: req.user });
+            res.send({ data: req.user });
         } else {
             res.sendStatus(401);
         }
