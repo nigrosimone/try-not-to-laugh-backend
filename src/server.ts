@@ -23,7 +23,8 @@ app.use(session({
      resave: true,
      saveUninitialized: true,
      secret: 'ds4f5s4f5s4f5s4f5a8',
-     store: new FileStore(session)()
+     store: new FileStore(session)(),
+     cookie: process.env.BACKEND_HOST.indexOf('.herokuapp.com') !== -1 ? { domain: '.herokuapp.com', secure: true } : { secure: false }
 }));
 app.use(passport.initialize());
 app.use(passport.session());
