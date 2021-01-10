@@ -20,6 +20,7 @@ app.use(session({
      name: 'sessid',
      resave: true,
      saveUninitialized: true,
+     secureProxy: true,
      secret: 'ds4f5s4f5s4f5s4f5a8',
      store: new FileStore(session)()
 }));
