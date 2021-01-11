@@ -19,7 +19,7 @@ passport.use(
         {
             clientID: process.env.FACEBOOK_CLIENT_ID,
             clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
-            callbackURL: process.env.BACKEND_HOST + 'auth/facebook/callback',
+            callbackURL: process.env.BACKEND_HOST + 'api/auth/facebook/callback',
             profileFields: ["email", "name"]
         },
         (accessToken, refreshToken, profile, done) => {
@@ -43,7 +43,7 @@ export class PassportController {
     }
 
     static authFacebookCallback() {
-        return passport.authenticate('facebook', { successRedirect: '/auth/facebook/ok', failureRedirect: '/auth/facebook/error' });
+        return passport.authenticate('facebook', { successRedirect: '/api/auth/facebook/ok', failureRedirect: '/api/auth/facebook/error' });
     }
 
     static authFacebookOk(req: Request, res: Response, next: Next) {
