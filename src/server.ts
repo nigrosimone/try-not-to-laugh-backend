@@ -8,6 +8,8 @@ import * as FileStore from 'session-file-store';
 import * as passport from "passport";
 import * as cors from 'cors';
 import { router } from "./routing";
+import * as path from "path";
+import * as fs from "fs";
 
 const app = express();
 
@@ -28,7 +30,27 @@ app.use(session({
 }));
 app.use(passport.initialize());
 app.use(passport.session());
-app.use(express.static('public'));
+
+const staticRoot = path.join(path.dirname(__dirname), 'public');
+app.use((req, res, next) => {
+     //if the request is not html then move along
+     const accept = req.accepts('html', 'json', 'xml');
+     if (accept !== 'html') {
+         return next();
+     }
+     // if the request has a '.' assume that it's for a file, move along
+     const ext = path.extname(req.path);
+     if (ext !== '') {
+         return next();
+     }
+     // api path
+     if( req.path.indexOf('api/') !== -1 ){
+          return next();
+     }
+     fs.createReadStream(path.join(staticRoot, 'index.html')).pipe(res);
+});
+app.use(express.static(staticRoot));
+
 
 app.use('/api', router);
 router.get('/', (req, res) => res.send("Hello backend"));
