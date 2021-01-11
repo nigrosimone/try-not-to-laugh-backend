@@ -6,7 +6,6 @@ import * as cookieParser from "cookie-parser";
 import * as session from "express-session";
 import * as FileStore from 'session-file-store';
 import * as passport from "passport";
-import * as proxy from 'express-http-proxy';
 import * as cors from 'cors';
 import { router } from "./routing";
 
