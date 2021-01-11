@@ -47,6 +47,10 @@ app.use((req, res, next) => {
      if( req.path.indexOf('api/') !== -1 ){
           return next();
      }
+     // assets path
+     if( req.path.indexOf('assets/') !== -1 ){
+          return next();
+     }
      fs.createReadStream(path.join(staticRoot, 'index.html')).pipe(res);
 });
 app.use(express.static(staticRoot));
