@@ -29,9 +29,10 @@ app.use(session({
 }));
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(express.static('public'));
 
 app.use('/api', router);
-app.use('/', proxy(process.env.FRONTEND_HOST.indexOf('.github.com') !== -1 ? process.env.FRONTEND_HOST + 'try-not-to-laugh-frontend/' : process.env.FRONTEND_HOST));
+router.get('/', (req, res) => res.send("Hello backend"));
 
 app.listen(process.env.PORT, () => {
      console.log(`Server is running in ${process.env.BACKEND_HOST}`)
