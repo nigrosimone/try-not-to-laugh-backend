@@ -20,14 +20,16 @@ passport.use(
             clientID: process.env.FACEBOOK_CLIENT_ID,
             clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
             callbackURL: process.env.BACKEND_HOST + 'api/auth/facebook/callback',
-            profileFields: ["email", "name"]
+            profileFields: ["id", "email", "name"]
         },
         (accessToken, refreshToken, profile, done) => {
-            const { email, first_name, last_name } = profile._json;
+            const { email, first_name, last_name, id } = profile._json;
             const userData = {
                 email,
                 firstName: first_name,
-                lastName: last_name
+                lastName: last_name,
+                id: id,
+                accessToken: accessToken
             };
             done(null, userData);
         }
