@@ -41,7 +41,7 @@ const FRONT_END_LOGIN = process.env.FRONTEND_HOST + 'login';
 export class PassportController {
 
     static authFacebook() {
-        return passport.authenticate('facebook', { scope: ['public_profile', ' manage_friendlists','user_friends' ,'email' ] });
+        return passport.authenticate('facebook', { scope: ['public_profile', 'manage_friendlists' ,'user_friends' ,'email' ] });
     }
 
     static authFacebookCallback() {
